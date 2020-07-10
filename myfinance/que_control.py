@@ -34,6 +34,20 @@ class Que_Temp:
             for idx in range(0, len(code_list)):
                 task_arg = [code_list[idx], ref_day]
                 self.temp.append(Que_element(task, task_arg))
+        elif task == 60000:
+            code_list = kwargs['code']
+            code_length = len(code_list)
+            if code_length < 101:
+                task_arg = [code_list]
+                self.temp.append(Que_element(task, task_arg))
+            else:
+                lh = int(code_length / 100)
+                for i0 in range(0, lh):
+                    task_arg = [code_list[(i0 * 100):((i0 + 1) * 100)]]
+                    self.temp.append(Que_element(task, task_arg))
+                if not (code_length % 100 == 0):
+                    task_arg = [code_list[(lh * 100):]]
+                    self.temp.append(Que_element(task, task_arg))
         self.status = len(self.temp)
 
     def pop_first(self):
@@ -58,3 +72,7 @@ class Que_element:
     def set_as_callBasicInfo(self, code):
         self.task = 1
         self.task_args = [code]
+
+    def set_as_interestedStockPrice(self, code_list):
+        self.task = 60000
+        self.task_args = [code_list]

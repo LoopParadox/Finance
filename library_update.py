@@ -10,6 +10,7 @@ from myfinance.que_control import Que_element, Que_Temp
 import myfinance.static as stt
 import time
 import threading
+import os
 
 
 class EventForward(QObject):
@@ -18,6 +19,10 @@ class EventForward(QObject):
 
 
 class FinanceWindow(QMainWindow):
+    EXIT_CODE_NORMAL = 0
+    EXIT_CODE_REBOOT = -1
+    EXIT_CODE_CONTINUE = 1
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("PyStock")
@@ -76,6 +81,12 @@ class FinanceWindow(QMainWindow):
         self.setCentralWidget(centralwidget)
         self.show()
 
+    def restart(self):
+        qApp.exit(self.EXIT_CODE_REBOOT)
+
+    def close_app_with_continue_msg(self):
+        qApp.exit(self.EXIT_CODE_CONTINUE)
+
     @pyqtSlot(str)
     def status_update(self, inputstr):
         if self.timer_running:
@@ -97,9 +108,10 @@ class FinanceWindow(QMainWindow):
         self.edit_status.setPlainText('')
 
     def loginAPI(self):
-        self.kiwoom.dynamicCall("CommConnect()")
-        self.islogin = True
-        self.req_no = 1
+        if not self.islogin:
+            self.kiwoom.dynamicCall("CommConnect()")
+            self.islogin = True
+            self.req_no = 1
 
     def logoutAPI(self):
         if self.islogin:
@@ -116,11 +128,8 @@ class FinanceWindow(QMainWindow):
             time.sleep(5)
             self.ticktime = pd.Timestamp(datetime.now())
             self.timeroff = 0
-        elif self.req_no > 900:
-            self.logoutAPI()
-            self.timer.setInterval(100000)
-            self.timer.start()
-            self.status_update('Hold on for 100 sec to avoid the request limitation')
+        elif self.req_no > 998:
+            self.close_app_with_continue_msg()
             return
         elif self.req_no % 68 == 0:
             deltatime = pd.Timestamp(datetime.now()) - self.ticktime
@@ -178,6 +187,7 @@ class FinanceWindow(QMainWindow):
     def event_connect(self, nErrCode):
         if nErrCode == 0:
             self.status_update('Login Success')
+            self.btn_login.setText('Connected')
         elif nErrCode == 100:
             self.status_update("Failed to exchange user information")
         elif nErrCode == 101:
@@ -274,7 +284,8 @@ class FinanceWindow(QMainWindow):
             data.index.name = 'Date'
             price_data = self.korea_list.load_ticker(tick_no)
             price_data.history = price_data.history.append(data)
-            price_data.sort_drop_dup()
+            price_data.history = price_data.history.sort_index()
+            price_data.history = price_data.history.drop_duplicates()
             price_data.save_history()
             first_stamp = price_data.history.index[0]
             last_stamp = price_data.history.index[-1]
@@ -321,7 +332,8 @@ class FinanceWindow(QMainWindow):
             data.index.name = 'Date'
             price_data = self.index_list_kor.load_ticker(tick_no)
             price_data.history = price_data.history.append(data)
-            price_data.sort_drop_dup()
+            price_data.history = price_data.history.sort_index()
+            price_data.history = price_data.history.drop_duplicates()
             price_data.save_history()
             first_stamp = price_data.history.index[0]
             last_stamp = price_data.history.index[-1]
@@ -359,6 +371,13 @@ class FinanceWindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    myWindow = FinanceWindow()
-    sys.exit(app.exec_())
+    currentExitCode = FinanceWindow.EXIT_CODE_REBOOT
+    while currentExitCode == FinanceWindow.EXIT_CODE_REBOOT:
+        app = QApplication(sys.argv)
+        myWindow = FinanceWindow()
+        currentExitCode = app.exec_()
+        app = None  # delete the QApplication object
+        if currentExitCode > 0:
+            print('Please restart the application to finish the tasks.')
+    # os.execl(sys.executable, sys.executable, *sys.argv)
+    # sys.exit(app.exec_())

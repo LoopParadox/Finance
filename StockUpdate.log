@@ -1,0 +1,343 @@
+------------------------
+Stock Price Update App. : 2020-07-07 23:03:22.202458
+------------------------
+Stock Price Update App. : 2020-07-07 23:06:52.408135
+------------------------
+Stock Price Update App. : 2020-07-07 23:09:26.429096
+------------------------
+Stock Price Update App. : 2020-07-07 23:13:55.024239
+2020-07-07 23:14:04.679936 : Login Success
+Error occured : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:19:50.420209
+2020-07-07 23:19:59.275066 : Login Success
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:21:59.425316
+2020-07-07 23:22:08.923296 : Login Success
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:32:03.672539
+------------------------
+Stock Price Update App. : 2020-07-07 23:35:27.445167
+2020-07-07 23:35:37.303034 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:36:52.945492
+2020-07-07 23:37:01.231852 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:37:39.598190
+2020-07-07 23:37:48.135617 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:38:54.360485
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:40:41.512304
+2020-07-07 23:40:50.438275 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:41:13.432856
+2020-07-07 23:41:23.369092 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:41:44.080794
+2020-07-07 23:41:52.257169 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:42:20.482236
+2020-07-07 23:42:28.849915 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:43:41.359382
+2020-07-07 23:43:50.465107 : Login Success
+Error_occured(E0005) : name 'STR_date' is not defined
+Error occured(E0002) : name 'STR_date' is not defined
+------------------------
+Stock Price Update App. : 2020-07-07 23:46:02.206474
+2020-07-07 23:46:11.451663 : Login Success
+2020-07-07 23:46:14.184899 : Update index price (6)
+------------------------
+Stock Price Update App. : 2020-07-08 00:22:00.446924
+2020-07-08 00:22:08.033005 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-08 00:32:19.352140
+2020-07-08 00:32:28.999698 : Login Success
+2020-07-08 00:32:39.732520 : Update stock price (2072+0)
+------------------------
+Stock Price Update App. : 2020-07-08 00:41:36.165517
+2020-07-08 00:41:46.082937 : Login Success
+2020-07-08 00:41:54.054460 : Update stock price (1874+0)
+------------------------
+Stock Price Update App. : 2020-07-08 23:07:32.778260
+2020-07-08 23:08:12.483400 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-08 23:13:49.092106
+------------------------
+Stock Price Update App. : 2020-07-08 23:14:21.096110
+2020-07-08 23:14:32.338764 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-08 23:14:41.872152
+2020-07-08 23:14:52.507354 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-09 00:08:14.177472
+------------------------
+Stock Price Update App. : 2020-07-09 00:09:25.540676
+2020-07-09 00:09:36.468580 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-09 00:16:05.238828
+2020-07-09 00:16:15.313206 : Login Success
+Task done successfully
+2020-07-09 00:16:29.708496 : Update index price (6)
+Task done successfully
+2020-07-09 00:16:38.031870 : Update stock price (2051)
+------------------------
+Stock Price Update App. : 2020-07-09 00:18:11.161751
+2020-07-09 00:18:11.971873 : Continue to update Korean Stock prices
+2020-07-09 00:18:18.485694 : Login Success
+------------------------
+Stock Price Update App. : 2020-07-09 00:20:22.230589
+2020-07-09 00:20:32.363125 : Login Success
+2020-07-09 00:20:37.362890 : Update stock price (1999)
+------------------------
+Stock Price Update App. : 2020-07-09 00:27:37.489699
+2020-07-09 00:27:38.337223 : Continue to update Korean Stock prices
+2020-07-09 00:27:44.763606 : Login Success
+2020-07-09 00:27:47.058640 : Update stock price (1941)
+------------------------
+Stock Price Update App. : 2020-07-09 00:31:20.504603
+2020-07-09 00:31:21.379970 : Continue to update Korean Stock prices
+2020-07-09 00:31:27.794980 : Login Success
+2020-07-09 00:31:30.136200 : Update stock price (1884)
+2020-07-09 00:31:41.882925 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 00:41:56.683381
+2020-07-09 00:42:10.174811 : Login Success
+2020-07-09 00:42:15.985131 : Update stock price (1878)
+2020-07-09 01:05:17.423192 : Close the app (continue)
+------------------------
+Stock Price Update App. : 2020-07-09 01:05:18.808374
+2020-07-09 01:05:19.835089 : Continue to update Korean Stock prices
+2020-07-09 01:05:23.928627 : Login Success
+2020-07-09 01:05:26.113825 : Update stock price (883)
+Task done successfully
+2020-07-09 04:00:36.569997 : Update stock price (7)
+2020-07-09 05:10:29.121032 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 05:10:44.284069
+2020-07-09 05:10:56.372795 : Login Success
+2020-07-09 05:11:02.458414 : Update stock price (7)
+Task done successfully
+2020-07-09 05:11:13.243007 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:46:50.455994
+2020-07-09 10:46:57.722548 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:48:08.881857
+2020-07-09 10:48:29.717833 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:49:31.213543
+2020-07-09 10:49:37.767019 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:49:54.405016
+2020-07-09 10:50:02.326729 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:50:27.618339
+2020-07-09 10:50:40.615680 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:51:01.846713
+2020-07-09 10:51:05.345349 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:51:38.126069
+2020-07-09 10:51:43.576911 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:52:06.375898
+2020-07-09 10:52:13.231685 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:52:25.070215
+2020-07-09 10:53:11.485810 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:53:20.233814
+2020-07-09 10:53:39.367608 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:54:20.578054
+2020-07-09 10:54:25.616041 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:54:43.566486
+2020-07-09 10:54:50.711588 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:56:37.024609
+2020-07-09 10:56:45.039597 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:57:06.369101
+2020-07-09 10:57:14.387444 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:57:20.755846
+2020-07-09 10:57:26.665032 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 10:58:21.448898
+2020-07-09 10:58:33.129705 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 11:00:52.102327
+2020-07-09 11:01:10.220545 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 11:01:13.185548
+2020-07-09 11:01:34.220800 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 11:02:43.497126
+2020-07-09 11:03:00.753377 : Login Success
+2020-07-09 11:03:08.033443 : Update stock price (7)
+Task done successfully
+2020-07-09 11:03:10.826979 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 11:03:18.705881
+2020-07-09 11:03:24.844357 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 11:55:12.117922
+2020-07-09 11:55:12.735262 : Continue to update Korean Stock prices
+2020-07-09 11:55:16.833600 : Login Success
+2020-07-09 11:55:24.036338 : Task done successfully
+2020-07-09 11:55:24.038352 : Close the app (normal)
+2020-07-09 11:55:24.048293 : Update index price (0)
+2020-07-09 11:55:24.049290 : Task done successfully
+2020-07-09 11:55:26.420451 : Update stock price (7)
+------------------------
+Stock Price Update App. : 2020-07-09 11:56:55.313990
+2020-07-09 11:56:55.913388 : Continue to update Korean Stock prices
+2020-07-09 11:57:00.026413 : Login Success
+2020-07-09 11:57:03.266742 : Update index price (0)
+2020-07-09 11:57:03.266742 : Task done successfully
+2020-07-09 11:57:03.268736 : Close the app (normal)
+2020-07-09 11:57:05.686266 : Update stock price (7)
+------------------------
+Stock Price Update App. : 2020-07-09 12:02:49.157841
+2020-07-09 12:02:49.773160 : Continue to update Korean Stock prices
+2020-07-09 12:02:53.888906 : Login Success
+2020-07-09 12:02:57.087346 : Task done successfully
+2020-07-09 12:02:57.094359 : Update index price (0)
+2020-07-09 12:02:57.095325 : Task done successfully
+2020-07-09 12:02:59.428133 : Update stock price (7)
+2020-07-09 12:03:02.876982 : Task done successfully
+2020-07-09 12:03:02.877979 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 12:41:50.931163
+2020-07-09 12:41:51.549478 : Continue to update Korean Stock prices
+2020-07-09 12:41:55.667463 : Login Success
+2020-07-09 12:41:59.019512 : Task done successfully
+2020-07-09 12:41:59.028488 : Update index price (0)
+2020-07-09 12:41:59.028488 : Task done successfully
+2020-07-09 12:42:01.401761 : Update stock price (7)
+2020-07-09 12:42:04.888400 : Task done successfully
+2020-07-09 12:42:04.891408 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 12:42:30.823375
+2020-07-09 12:42:31.464661 : Continue to update Korean Stock prices
+2020-07-09 12:42:35.577686 : Login Success
+2020-07-09 12:42:38.870873 : Task done successfully
+2020-07-09 12:42:38.878853 : Update index price (0)
+2020-07-09 12:42:38.879850 : Task done successfully
+2020-07-09 12:42:41.316331 : Update stock price (7)
+2020-07-09 12:42:44.736684 : Task done successfully
+2020-07-09 12:42:44.738689 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 12:48:21.624180
+2020-07-09 12:48:22.244486 : Continue to update Korean Stock prices
+2020-07-09 12:48:26.525528 : Login Success
+2020-07-09 12:48:29.798785 : Task done successfully
+2020-07-09 12:48:29.806760 : Update index price (0)
+2020-07-09 12:48:29.806760 : Task done successfully
+2020-07-09 12:48:32.153708 : Update stock price (7)
+2020-07-09 12:48:35.583557 : Task done successfully
+2020-07-09 12:48:35.585526 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 13:00:01.391595
+2020-07-09 13:00:02.259272 : Continue to update Korean Stock prices
+2020-07-09 13:00:07.809418 : Login Success
+2020-07-09 13:00:12.357247 : Task done successfully
+2020-07-09 13:00:12.366249 : Update index price (0)
+2020-07-09 13:00:12.367221 : Task done successfully
+2020-07-09 13:00:15.114895 : Update stock price (7)
+2020-07-09 13:00:19.023411 : Task done successfully
+2020-07-09 13:00:19.024405 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 16:14:11.671843
+2020-07-09 16:14:12.290188 : Continue to update Korean Stock prices
+2020-07-09 16:14:19.101274 : Login Success
+2020-07-09 16:14:22.485202 : Task done successfully
+2020-07-09 16:14:22.494176 : Update index price (0)
+2020-07-09 16:14:22.494176 : Task done successfully
+2020-07-09 16:14:24.893786 : Update stock price (7)
+2020-07-09 16:14:28.477165 : Task done successfully
+2020-07-09 16:14:28.480158 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 16:17:15.004065
+2020-07-09 16:17:15.586509 : Continue to update Korean Stock prices
+2020-07-09 16:17:19.649577 : Login Success
+2020-07-09 16:17:24.734519 : Task done successfully
+2020-07-09 16:17:24.742496 : Update index price (0)
+2020-07-09 16:17:24.743493 : Task done successfully
+2020-07-09 16:17:27.111191 : Update stock price (7)
+2020-07-09 16:17:30.603810 : Task done successfully
+2020-07-09 16:17:30.606803 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 16:19:56.928422
+2020-07-09 16:19:57.517814 : Continue to update Korean Stock prices
+2020-07-09 16:20:01.672695 : Login Success
+2020-07-09 16:20:03.671347 : Task done successfully
+2020-07-09 16:20:03.679326 : Update index price (0)
+2020-07-09 16:20:03.679326 : Task done successfully
+2020-07-09 16:20:05.986151 : Update stock price (7)
+2020-07-09 16:20:09.380080 : Task done successfully
+2020-07-09 16:20:09.381067 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-09 16:23:42.336865
+2020-07-09 16:23:42.928282 : Continue to update Korean Stock prices
+2020-07-09 16:23:47.001856 : Login Success
+2020-07-09 16:23:48.792644 : Task done successfully
+2020-07-09 16:23:48.800616 : Update index price (0)
+2020-07-09 16:23:48.801617 : Task done successfully
+2020-07-09 16:23:51.072649 : Update stock price (7)
+2020-07-09 16:23:54.442251 : Task done successfully
+2020-07-09 16:23:54.444212 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-10 05:00:01.684752
+2020-07-10 05:00:02.763306 : Continue to update Korean Stock prices
+2020-07-10 05:00:09.869468 : Login Success
+2020-07-10 05:00:15.769474 : Task done successfully
+2020-07-10 05:00:15.779474 : Update index price (6)
+2020-07-10 05:00:17.894803 : Update stock price (2071)
+2020-07-10 08:46:37.321483 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-10 08:46:51.234260
+2020-07-10 08:46:51.864276 : Continue to update Korean Stock prices
+2020-07-10 08:46:56.046898 : Login Success
+2020-07-10 08:47:01.104335 : Task done successfully
+2020-07-10 08:47:01.114344 : Update index price (3)
+2020-07-10 08:47:03.568149 : Update stock price (1922)
+2020-07-10 08:55:00.589230 : Close the app (normal)
+------------------------
+Stock Price Update App. : 2020-07-10 08:56:00.950064
+2020-07-10 08:56:01.544082 : Continue to update Korean Stock prices
+2020-07-10 08:56:05.829321 : Login Success
+2020-07-10 08:56:09.694738 : Task done successfully
+2020-07-10 08:56:09.704735 : Update index price (2)
+2020-07-10 08:56:11.900029 : Update stock price (1572)
+2020-07-10 09:13:22.421029 : Close the app (continue)
+------------------------
+Stock Price Update App. : 2020-07-10 09:13:23.963609
+2020-07-10 09:13:24.654803 : Continue to update Korean Stock prices
+2020-07-10 09:13:29.046418 : Login Success
+2020-07-10 09:13:32.902918 : Task done successfully
+2020-07-10 09:13:32.912908 : Update index price (2)
+2020-07-10 09:13:35.188333 : Update stock price (578)
+2020-07-10 09:23:28.108861 : Task done successfully
+2020-07-10 09:23:28.108861 : Close the app (normal)

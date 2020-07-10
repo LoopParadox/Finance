@@ -63,6 +63,13 @@ CAUSE = {
     -500: '종목코드없음'
 }
 
+# logger error sources
+Err_login = 'E0001'
+Err_call = 'E0002'
+Err_tr = 'E0003'
+Err_kwcomm = 'E0004'
+Err_stocklist = 'E0005'
+
 # Input arguments
 ARG_LOGIN_SERVER_GUBUN = 'GetServerGubun'  # 접속서버 구분을 반환합니다.(1: 모의투자, 나머지: 실서버)
 ARG_LOGIN_ACCOUNT_CNT = 'ACCOUNT_CNT'  # 보유계좌 수를 반환합니다.
@@ -71,7 +78,6 @@ ARG_LOGIN_USR_ID = "USER_ID"  # 사용자 ID를 반환합니다.
 ARG_LOGIN_USR_NAME = "USER_NAME"  # 사용자 이름을 반환합니다.
 ARG_LOGIN_KEY_SAFETY = "KEY_BSECGB"  # 키보드 보안 해지여부를 반환합니다.(0: 정상, 1: 해지)
 ARG_LOGIN_FIREWALL = "FIREW_SECGB"  # 방화벽 설정여부를 반환합니다.(0: 미설정, 1: 설정, 2: 해지)
-STR_date = '%Y%m%d'         # 날짜 표시 형식
 
 # Command list
 COM_LOGIN = 'CommConnect()'
@@ -302,4 +308,3 @@ RTcode = {10: '현재가', 11: '전일대비', 12: '등락율', 13: "누적거�
 LIST_data_account = [RTcode[9001], RTcode[302], RTcode[10], RTcode[930], RTcode[931], RTcode[932], RTcode[933],
                      RTcode[945], RTcode[946], RTcode[950], RTcode[951], RTcode[27], RTcode[28], RTcode[307],
                      RTcode[8019], RTcode[397]]
-

@@ -3,6 +3,15 @@ import numpy as np
 from myfinance.constants import *
 
 
+STR_date = '%Y%m%d'
+PD_col_codes = 'Tickers'
+PD_col_ratio = 'Ratio_max'
+PD_col_price = 'Price_max'
+PD_col_days = list(range(1, 6))
+PD_col_targets = ['Close', 'Open', 'High', 'Low']
+PD_columns = [PD_col_ratio, PD_col_price] + [f'{item}-{day}' for item in PD_col_targets for day in PD_col_days]
+
+
 def timestamp_day_before_n_days(today_pandas, n=1):
     yesterday = pd.Timestamp(today_pandas.timestamp() - (n * 3600 * 24), unit='s')
     return yesterday
@@ -71,3 +80,13 @@ def get_tick_size(current_price):
     else:
         tick_size = 1000
     return tick_size
+
+
+def cal_alarm_interval(alarm_hour):
+    time_now = pd.Timestamp.now()
+    if time_now.hour < alarm_hour:
+        time_update = pd.Timestamp(time_now.strftime("%Y%m%d")) + pd.Timedelta(hours=alarm_hour)
+    else:
+        time_update = pd.Timestamp(time_now.strftime("%Y%m%d")) + pd.Timedelta(days=1) + pd.Timedelta(hours=alarm_hour)
+    time_delta = time_update - time_now
+    return int(time_delta.seconds * 1000)

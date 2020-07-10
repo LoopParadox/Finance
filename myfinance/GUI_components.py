@@ -251,78 +251,46 @@ class ManualOrder(QtWidgets.QGroupBox):
                 self.widgets[self.KEY_price].setValue(cur_price)
 
 
-class PredData(QObject):
+class PredictionAnalyzer(QObject):
     error_signal = pyqtSignal(str)
-    data = None
-    latest_date = None
-    latest_file = None
+    ref_date = stt.timestamp_ref_date()
+    pred_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(ref_date)}.pkl'
+    y_data_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(ref_date)}.npy'
+    CLASS_0 = 'class_0'
+    CLASS_1 = 'class_1'
+    CLASS_2 = 'class_2'
 
-    def __init__(self, pred_data_path='..\\MachineLearningTest\\prediction_data\\KOSPI-simple'):
+    def __init__(self):
         super().__init__()
-        self.file_path = pred_data_path
-        if os.path.isdir(self.file_path):
-            self.load_pred_data()
-            self.find_stock_class()
-            self.find_target_price()
+        self.isnone = False
+        if os.path.isfile(self.pred_file):
+            self.pred_df = pd.read_pickle(self.pred_file)
         else:
-            self.emit_error_signal('Invalid data path')
-            return
-
-    def emit_error_signal(self, error_msg):
-        self.error_signal.emit(error_msg)
-
-    def load_pred_data(self, pred_data_path=None):
-        if pred_data_path is not None:
-            if os.path.isdir(pred_data_path):
-                self.file_path = pred_data_path
-            else:
-                self.emit_error_signal('Invalid data path')
-                return
-        filelist = pd.DataFrame(os.listdir(self.file_path), columns=['FullName'])
-        filelist[['Time', 'EXT']] = filelist['FullName'].str.split('.', expand=True)
-        self.latest_date = filelist['Time'].apply(pd.Timestamp).max()
-        self.latest_file = self.latest_date.strftime('%Y%m%d') + '.csv'
-        self.data = pd.read_csv(f'{self.file_path}\\{self.latest_file}', index_col=0)
-        self.data['code'] = self.data['Tickers'].str.split('.', expand=True)[0]
-
-    def find_stock_class(self, crit=0.05):
-        class0 = self.data['Ratio_max'] > (1 + crit)
-        class1 = (self.data['Ratio_max'] < (1 + crit)) & (self.data['Ratio_max'] > 1)
-        self.data['Class'] = 2
-        self.data.loc[class0, 'Class'] = 0
-        self.data.loc[class1, 'Class'] = 1
-
-    def find_target_price(self):
-        dp_high = self.data['High'] - self.data['Close']
-        dp_low = self.data['Low'] - self.data['Close']
-        close_today = (self.data['Close'] * self.data['1']).astype(int)
-        self.data['Buy'] = close_today + dp_low
-        self.data['Sell'] = self.data['Price_max'] + (dp_high * 0.3)
-        class0 = self.data['Class'] == 0
-        class1 = self.data['Class'] == 1
-        self.data.loc[class0, 'Buy'] = close_today[class0] + (dp_low * 0.2)
-        self.data.loc[class1, 'Buy'] = close_today + (dp_low * 0.6)
-        tick_size = self.get_tick_size_series(self.data['Close'])
-        self.data['Buy'] = self.data['Buy'] - (self.data['Buy'] % tick_size)
-        self.data['Sell'] = self.data['Sell'] - (self.data['Sell'] % tick_size)
-        self.data[['Buy', 'Sell']].astype(int)
-
-    def get_interested_stocks(self, stock_list=None):
-        if stock_list is None:
-            return self.data.loc[self.data['Class'] < 2]
+            self.pred_df = None
+            self.isnone = True
+        if os.path.isfile(self.y_data_file):
+            self.data_y = np.load(self.y_data_file)
         else:
-            interested = (self.data['Class'] < 2) & self.data['code'].isin(stock_list)
-            return self.data.loc[interested]
+            self.data_y = None
+            self.isnone = True
 
-    def get_tick_size_series(self, price):
-        tick_size = pd.Series(np.full(len(price), 1000))
-        tick_size[price < 500000] = 500
-        tick_size[price < 100000] = 100
-        tick_size[price < 50000] = 50
-        tick_size[price < 10000] = 10
-        tick_size[price < 5000] = 5
-        tick_size[price < 1000] = 1
-        return tick_size
+    def extract_codes(self):
+        if not self.isnone:
+            return self.pred_df[stt.PD_col_codes].str.slice(0, 6).values
+
+    def verify_price(self):
+        if not self.isnone:
+            self.pred_df[self.CLASS_0] = self.pred_df[stt.PD_col_ratio] > 1.05
+            self.pred_df[self.CLASS_1] = (self.pred_df[stt.PD_col_ratio] < 1.05) & (self.pred_df[stt.PD_col_ratio] > 1.0)
+            self.pred_df[self.CLASS_2] = self.pred_df[stt.PD_col_ratio] < 1.0
+            col_high = [f'High-{day}' for day in range(1, 6)]
+            self.pred_df['highest'] = self.pred_df[col_high].max(axis=1)
+            self.pred_df['code'] = self.pred_df[stt.PD_col_codes].str.slice(stop=6)
+            self.pred_df['Sell'] = ((self.pred_df['highest'] - 1.0) * 0.3 + 1.0) * self.pred_df['Close']
+            self.pred_df['Buy'] = ((self.pred_df['Low-1'] - 1.0) * 0.5 + 1.0) * self.pred_df['Close']
+            ticksize = self.pred_df['Close'].apply(stt.get_tick_size)
+            self.pred_df['Sell'] = (self.pred_df['Sell'] / ticksize).astype(int) * ticksize
+            self.pred_df['Buy'] = (self.pred_df['Buy'] / ticksize).astype(int) * ticksize
 
 
 class PlotCanvas(FigureCanvas):

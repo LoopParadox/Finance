@@ -1,7 +1,6 @@
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QTime, QTimer
 from myfinance.commlogg import CommLog
-from myfinance.GUI_components import PredData
 import myfinance.static as stt
 import pandas as pd
 import numpy as np
@@ -29,7 +28,6 @@ class KWcomm(QObject):
         self.list_account = []
         self.stock_data = StockDataCurrent()
         self.contract_list = StockDataCurrent(header=stt.LIST_contract_stock, query=2)
-        self.prediction = PredData()
         self.que_main = Queue()
         self.que_main.call_info.connect(self.__call_information_queue)
         self.que_main.status_signal.connect(self.__send_status)
@@ -391,10 +389,10 @@ class KWcomm(QObject):
                 return
         ret = self.kwinst.dynamicCall(stt.COM_SEND_ORDER, input_args)
         if ret == 0:
-            self.__send_status('Ordered successfully')
+            self.__send_status(f'Ordered successfully')
             buysell_str = stt.LIST_buy_sell[input_dict[stt.ARG_order_type] - 1]
             self.__send_progress(
-                f'Order ({input_dict[stt.ARG_stock_code]} {buysell_str} : {input_dict[stt.ARG_price]}) sent')
+                f'{input_dict[stt.ARG_stock_code]} ({buysell_str} : {input_dict[stt.ARG_quantity]}) @ {input_dict[stt.ARG_price]}')
         else:
             self.__send_error('Failed to order')
 
