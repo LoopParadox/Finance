@@ -1,10 +1,8 @@
 from PyQt5.QAxContainer import *
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QTime, QTimer
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
 from myfinance.commlogg import CommLog
 import myfinance.static as stt
 import pandas as pd
-import numpy as np
-from myfinance.que_control import kwQueue
 
 
 class KWcomm(QObject):
@@ -148,10 +146,12 @@ class KWcomm(QObject):
     def __on_receive_chejan_data(self, sGubun, nItemCnt, sFIdList):
         if sGubun == '0':
             self.__send_progress(f'주문/체결 신호 획득 : 주문체결')
+            self.comm_query_stock.emit()
             self.comm_query_order.emit()
         elif sGubun == '1':
             self.__send_progress(f'주문/체결 획득 : 잔고획득')
             self.comm_query_stock.emit()
+            self.comm_query_order.emit()
         else:
             return
 
@@ -292,7 +292,7 @@ class KWcomm(QObject):
     def get_code_name(self, code_str):
         return self.kwinst.dynamicCall(stt.COM_GET_CODENAME, code_str)
 
-    def get_intersted_stock_info(self, codelist):
+    def get_interested_stock_info(self, codelist):
         codeinput = ';'.join(codelist)
         codelength = len(codelist)
         return self.kwinst.CommKwRqData(codeinput, False, codelength, 0, stt.TR_INTERESTS,
@@ -553,8 +553,8 @@ class StockDataCurrent:
             self.add_to_stock_table(data_frame)
 
     def update_multiple_values(self, data_dict):
-        code_list = data_dict[stt.HD_out_dict_code]
-        if isinstance(code_list, list):
+        code_list = set(data_dict[stt.HD_out_dict_code])
+        if isinstance(code_list, set):
             code_num = len(code_list)
         else:
             return
@@ -563,15 +563,20 @@ class StockDataCurrent:
         else:
             return
         if self.header_query in data_frame.columns:
-            for code in code_list:
-                row_input = data_frame[self.header_query].isin([code])
-                if self.code_exist([code]):
-                    row_index = self.isin_code([code])
-                    datakeys = data_frame.columns.to_list()
-                    c_header = list(set(self.header).intersection(datakeys))
+            code_exist = set(self.stocktable[self.header_query].tolist())
+            code_new = code_list.difference(code_exist)
+            code_old = code_list.intersection(code_exist)
+            if len(code_old) > 0:
+                datakeys = data_frame.columns.to_list()
+                c_header = list(set(self.header).intersection(datakeys))
+                for code in code_old:
+                    row_index = self.stocktable.loc[self.stocktable[self.header_query] == code].index[0]
+                    row_input = data_frame.loc[data_frame[self.header_query] == code].index[0]
                     for key in c_header:
                         self.stocktable.loc[row_index, key] = data_frame.loc[row_input, key]
-                else:
+            if len(code_new) > 0:
+                for code in code_new:
+                    row_input = data_frame[self.header_query].isin([code])
                     self.add_to_stock_table(data_frame.loc[row_input])
 
     def update_current_price(self, data_dict):

@@ -1,19 +1,11 @@
 import sys
 import logging
-import threading
 import pandas as pd
 import numpy as np
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QAxContainer import *
 from PyQt5.QtCore import pyqtSlot
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-import matplotlib.patches as ptch
-from datetime import datetime
 from myfinance.kiwoom import KWcomm
 import myfinance.static as stt
-import myfinance.QTstocklist as StLib
 import myfinance.GUI_components as GuiC
 
 
@@ -26,10 +18,7 @@ class FinanceWindow(QMainWindow):
         self.set_logger(log_filename=f'{stt.timestamp_kw_str(pd.Timestamp.now())}_AutoTrade.log')
         self.kwAPI = KWcomm()
         self.req_no = 0
-        self.code_interested = []
-        self.prediction = GuiC.PredictionAnalyzer()
-        self.prediction.verify_price()
-
+        self.code_interested = set()
         self.btn_login = GuiC.TwoStatesToggleButton(['Login', 'Logout'])
         self.btn_login.clicked.connect(self.login_logout)
         self.data_txt = QTextEdit('')
@@ -60,6 +49,13 @@ class FinanceWindow(QMainWindow):
         centralwidget.setLayout(verLayOut)
         self.setCentralWidget(centralwidget)
         self.init_kiwoom()
+
+        self.prediction = GuiC.PredictionAnalyzer()
+        if not self.prediction.isnone:
+            self.class_0 = self.prediction.get_stocklist_by_class(self.prediction.CLASS_0)
+            self.class_1 = self.prediction.get_stocklist_by_class(self.prediction.CLASS_1)
+            self.add_list_to_code_interested(self.class_0 + self.class_1)
+
         self.login_logout(True)
         self.show()
 
@@ -87,8 +83,15 @@ class FinanceWindow(QMainWindow):
         self.stock_list_table.selected_row_data.connect(self.man_order.set_input_arguments)
         self.order_list_table.selected_row_data.connect(self.man_order.set_input_arguments)
 
+    def add_list_to_code_interested(self, code_list):
+        self.code_interested = self.code_interested.union(set(code_list))
+
+    def add_str_to_code_interested(self, code):
+        self.code_interested.add(code)
+
     @pyqtSlot(str)
     def error_popup(self, error_msg):
+        self.logger.error(f'{pd.Timestamp.now()} : {error_msg}')
         QMessageBox.about(self, 'Error Message', error_msg)
 
     @pyqtSlot(bool)
@@ -112,18 +115,26 @@ class FinanceWindow(QMainWindow):
     def arrange_data_dict(self, data_dict):
         codes = data_dict['code']
         query_all = False
-        for code in codes:
-            if code not in self.code_interested:
-                self.code_interested.append(code)
-                query_all = True
+        code_diff = set(codes).difference(self.code_interested)
+        if len(code_diff) > 0:
+            query_all = True
+            self.add_list_to_code_interested(codes)
         self.stock_list_table.update_data(self.kwAPI.get_stock_table())
         self.order_list_table.update_data(self.kwAPI.get_contract_list())
         if query_all:
-            self.kwAPI.get_intersted_stock_info(self.code_interested)
+            self.kwAPI.get_interested_stock_info(list(self.code_interested))
 
     @pyqtSlot(dict)
     def arrange_orders(self, order_dict):
+        codes = order_dict['data']['종목코드'].to_list()
+        query_all = False
+        code_diff = set(codes).difference(self.code_interested)
+        if len(code_diff) > 0:
+            query_all = True
+            self.add_list_to_code_interested(codes)
         self.order_list_table.update_data(self.kwAPI.get_contract_list())
+        if query_all:
+            self.kwAPI.get_interested_stock_info(list(self.code_interested))
 
     @pyqtSlot(str)
     def status_update(self, inputstr):
@@ -156,9 +167,8 @@ class FinanceWindow(QMainWindow):
 
     @pyqtSlot(str)
     def query_stock_code(self, code_str):
-        if code_str not in self.code_interested:
-            self.code_interested.append(code_str)
-        self.kwAPI.get_intersted_stock_info(self.code_interested)
+        self.code_interested.add(code_str)
+        self.kwAPI.get_interested_stock_info(self.code_interested)
 
     @pyqtSlot(dict)
     def update_history(self, data_dict):

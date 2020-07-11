@@ -59,6 +59,16 @@ def timestamp_kw_str(timestamp_pandas):
     return timestamp_pandas.strftime(STR_date)
 
 
+def timestamp_find_next_opening(today=pd.Timestamp.now(), opening_time=9):
+    if today.hour < opening_time:
+        next_opening = timestamp_date_only(today) + pd.Timedelta(hours=opening_time)
+    else:
+        next_opening = timestamp_date_only(today) + pd.Timedelta(days=1, hours=opening_time)
+    if next_opening.weekday() > 4:
+        next_opening = next_opening + pd.Timedelta(days=(7-next_opening.weekday()))
+    return next_opening
+
+
 def stock_table_indexing():
     """parameters shown in Tester UI"""
     return ['종목코드', '종목명', '현재가', '기준가', '전일대비', '등락율', '거래량', '매도호가', '매수호가']
@@ -89,4 +99,13 @@ def cal_alarm_interval(alarm_hour):
     else:
         time_update = pd.Timestamp(time_now.strftime("%Y%m%d")) + pd.Timedelta(days=1) + pd.Timedelta(hours=alarm_hour)
     time_delta = time_update - time_now
-    return int(time_delta.seconds * 1000)
+    return int(time_delta.total_seconds() * 1000)
+
+
+def cal_alarm_interval_until_target(target):
+    time_now = pd.Timestamp.now()
+    target_time = pd.Timestamp(target)
+    time_delta = target_time - time_now
+    if time_now > target_time:
+        time_delta = time_delta - pd.Timedelta(days=time_delta.days)
+    return int(time_delta.total_seconds() * 1000)

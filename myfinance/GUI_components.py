@@ -256,22 +256,36 @@ class PredictionAnalyzer(QObject):
     ref_date = stt.timestamp_ref_date()
     pred_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(ref_date)}.pkl'
     y_data_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(ref_date)}.npy'
+    isnone = False
+    pred_df = pd.DataFrame()
+    data_y = np.array([])
     CLASS_0 = 'class_0'
     CLASS_1 = 'class_1'
     CLASS_2 = 'class_2'
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         super().__init__()
+        if 'latest' in kwargs:
+            self.set_reference_date(kwargs['latest'])
+        self.load_prediction_data()
+        self.verify_price()
+
+    def set_reference_date(self, ref_date):
+        self.ref_date = pd.Timestamp(ref_date)
+        self.pred_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(self.ref_date)}.pkl'
+        self.y_data_file = f'..\\MachineLearningTest\\prediction_data\\KOSPI-multi\\{stt.timestamp_kw_str(self.ref_date)}.npy'
+
+    def load_prediction_data(self):
         self.isnone = False
         if os.path.isfile(self.pred_file):
             self.pred_df = pd.read_pickle(self.pred_file)
         else:
-            self.pred_df = None
+            self.pred_df = pd.DataFrame()
             self.isnone = True
         if os.path.isfile(self.y_data_file):
             self.data_y = np.load(self.y_data_file)
         else:
-            self.data_y = None
+            self.data_y = np.array([])
             self.isnone = True
 
     def extract_codes(self):
@@ -291,6 +305,9 @@ class PredictionAnalyzer(QObject):
             ticksize = self.pred_df['Close'].apply(stt.get_tick_size)
             self.pred_df['Sell'] = (self.pred_df['Sell'] / ticksize).astype(int) * ticksize
             self.pred_df['Buy'] = (self.pred_df['Buy'] / ticksize).astype(int) * ticksize
+
+    def get_stocklist_by_class(self, bsclass):
+        return self.pred_df.loc[self.pred_df[bsclass], 'code'].to_list()
 
 
 class PlotCanvas(FigureCanvas):
